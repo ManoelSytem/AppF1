@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="F1.Views.TabView.HomeView"
+             xmlns:templateSelector="clr-namespace:F1.Helpers.TemplateSelectors"
+             xmlns:views="clr-namespace:F1.Views"
+             xmlns:controls="clr-namespace:F1.Views.Controls"
+             xmlns:nav="clr-namespace:F1.Views.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             NavigationPage.HasNavigationBar="False">
+
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <templateSelector:HomeResultsTemplateSelector x:Key="HomeResultsTemplateSelector" />
+            <templateSelector:HomeScheduleTemplateSelector x:Key="HomeScheduleTemplateSelector" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, Dark={StaticResource DarkPageBackgroundColor}}">
+            <Grid
+                Margin="20,10,20,5"
+                ColumnDefinitions="*, Auto"
+                RowDefinitions="Auto, Auto"
+                RowSpacing="0">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource Body1FontSize_ExoRegular}"
+                    Text="Hello"
+                    TextColor="{AppThemeBinding Light={StaticResource LightSecondaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource Body1FontSize_ExoBold}"
+                    Text="Formula 1 Fan"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkPrimaryTextColor}}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    Margin="5,0,5,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource Headline2FontSize_FontAwesome}"
+                    Text="&#xf2bd;"
+                    TextColor="{StaticResource AccentColor}"
+                    VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ProfileCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Label
+                Margin="20,0,20,0"
+                Style="{StaticResource Body1FontSize_ExoBold}"
+                Text="Latest results" />
+            <StackLayout
+                Margin="20,0,0,0"
+                HeightRequest="150">
+
+                    <StackLayout 
+                                 IsVisible="{Binding Visitor}">
+                        <controls:SkeletonView
+                  BackgroundColor="{AppThemeBinding Light={StaticResource LightCardBackgroundColor},
+                                                    Dark={StaticResource DarkCardBackgroundColor}}"
+                  CornerRadius="15"
+                  HeightRequest="15"
+                  HorizontalOptions="Start" />
+                    <StackLayout  Orientation="Horizontal" Spacing="0">
+                            <views:HomeResultsLoadingView />
+                            <views:HomeResultsLoadingView />
+                            <views:HomeResultsLoadingView />
+                        </StackLayout>
+                    </StackLayout>
+
+                <Label Style="{StaticResource Body2FontSize_ExoRegular}" Text="{Binding LatestRace}" />
+                    
+                <CollectionView ItemTemplate="{StaticResource HomeResultsTemplateSelector}" ItemsSource="{Binding LatestResults}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+                    
+               
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+        
+</ContentPage>
