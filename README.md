@@ -24,7 +24,7 @@ O aplicativo está usando dados da API Ergast .
 
 #UI prototipo
 
-<img src="https://github.com/gheorghedarle/Xamarin-Formula1/blob/main/Screenshots/light_mode.png?raw=true" Width="1620" />
+<img src="https://github.com/ManoelSytem/AppF1/blob/main/light_mode.png?raw=true" Width="1620" />
 
 
 
